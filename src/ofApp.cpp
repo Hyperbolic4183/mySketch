@@ -1,25 +1,27 @@
 #include "ofApp.h"
 
+const float radius = 30.0f;
+const vec2 velocity{ 300.0f, 200.0f };
+
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofBackground(0, 0, 0);
+    position = vec2{ radius };
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    position += velocity * ofGetLastFrameTime();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetColor(255, 0, 0);
-    ofDrawCircle(0.0f, 0.0f, 100.0f);
-    ofDrawRectangle(300.0f, 200.0f, 90.0f, 60.0f);
+    ofDrawCircle(position, radius);
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    std::cout << static_cast<char>(key)
-              << "was pressed\n";
+    
 }
 
 //--------------------------------------------------------------

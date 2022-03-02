@@ -2,8 +2,11 @@
 
 #include "ofMain.h"
 
-class ofApp : public ofBaseApp{
+using namespace glm;
 
+class ofApp : public ofBaseApp{
+    vec2 position;
+    
 	public:
 		void setup();
 		void update();
