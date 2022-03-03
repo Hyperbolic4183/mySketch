@@ -5,7 +5,7 @@
 using namespace glm;
 
 class ofApp : public ofBaseApp{
-    vec2 position;
+    vec2 position, velocity;
     
 	public:
 		void setup();
