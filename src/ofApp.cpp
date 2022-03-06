@@ -18,7 +18,9 @@ void ofApp::update(){
     position += velocity * dt;
     //w-rを計算する
     const float wr = ofGetWidth() - 1.0f - radius;
-    //もし円がウィンドウからはみ出たら
+    //h-rを計算する
+    const float hr = ofGetHeight() - 1.0f - radius;
+    //もし円が右枠からはみ出たら
     if (position.x >= wr) {
         //壁と衝突した時刻を求める
         const float t = (wr - p.x) / velocity.x;
@@ -26,7 +28,43 @@ void ofApp::update(){
         const vec2 q = vec2{wr, p.y + velocity.y * t};
         //衝突後の速度を変更する
         velocity = vec2{-velocity.x, velocity.y};
-        //円の位置を変更すr
+        //円の位置を変更する
+        position = q + velocity * (dt - t);
+    }
+    
+    //もし円が下枠からはみ出たら
+    if (position.y >= hr) {
+        //壁と衝突した時刻を求める
+        const float t = (hr - p.y)/velocity.y;
+        //衝突した位置を求める
+        const vec2 q = vec2{p.x + velocity.x * t, hr};
+        //衝突後の速度を変更する
+        velocity = vec2{velocity.x, -velocity.y};
+        //円の位置を変更する
+        position = q + velocity * (dt - t);
+    }
+    
+    //もし円が左枠からはみ出たら
+    if (position.x <= radius) {
+        //壁と衝突した時刻を求める
+        const float t = (radius - p.x) / velocity.x;
+        //衝突した位置を求める
+        const vec2 q = vec2{radius, p.y + velocity.y * t};
+        //衝突後の速度を変更する
+        velocity = vec2{-velocity.x, velocity.y};
+        //円の位置を変更する
+        position = q + velocity * (dt - t);
+    }
+    
+    //もし円が上枠からはみ出たら
+    if (position.y <= radius) {
+        //壁と衝突した時刻を求める
+        const float t = (radius - p.y)/velocity.y;
+        //衝突した位置を求める
+        const vec2 q = vec2{p.x + velocity.x * t, radius};
+        //衝突後の速度を変更する
+        velocity = vec2{velocity.x, -velocity.y};
+        //円の位置を変更する
         position = q + velocity * (dt - t);
     }
 }
